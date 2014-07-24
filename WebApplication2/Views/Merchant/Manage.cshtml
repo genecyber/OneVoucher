@@ -3,11 +3,33 @@
 
 @{
     ViewBag.Title = "Manage Profile";
+    int CashoutTotal = Model.Vouchers.Where(v => v.Paid && v.Spent && !v.CashedOutToMerchant).Sum(x => x.AmoutToLoad);
 }
 <script>
     $(document).ready(function () {
+
         $("a:contains('Merchants')").addClass("active");
+        $("input[value='Cash-Out'][type='submit']").each(function (index) {
+            $(this).click(function(data) {
+                $.ajax({
+                    url: '/Merchant/RequestCashOut',
+                    data: {
+                        __RequestVerificationToken: $("[name='__RequestVerificationToken']").val(),
+                        UserId: $("#Merchant_UserId").val(),
+                        CashoutRequested: "true"
+                    },
+                    type: 'POST',
+                    success: function () {
+                        disableCashout('Cash-Out Requested');
+                    }
+                });
+            });
+        });
     });
+    function disableCashout(v) {
+        $("input[value='Cash-Out'][type='submit']").prop('disabled', true);
+        $("input[value='Cash-Out'][type='submit']").attr('value', v);
+    }
 </script>
 <div class="main">
     <div class="content_box">
@@ -16,22 +38,45 @@
             <p>
                 Looking for the @Html.ActionLink("Merchant Integration", "Manage", "Merchant") Page?
             </p>
-            <div class="border" style="margin: 30px 0 25px 0"></div>
-            <div class="grey_box" style="margin-bottom: 30px;">
-                <div class="merchants_main_dv">
-                    <h2>Balance: @Model.Vouchers.Where(m=> !m.Voucher.MerchantPaid).GroupBy(x => x.Voucher.Id, x=> x.Voucher.AmoutToLoad).Select(x => new { Type = x.Key, SubTotal = x.Sum() }).FirstOrDefault()</h2>
-                    <input type="submit" value="Cash-Out" class="btn btn-default" />
-                    <div class="border" style="margin: 30px 0 25px 0"></div>
-                    <h2>History</h2>
-                    @foreach (var item in Model.Vouchers.Where(a => a.Voucher.MerchantPaid))
-                    {
-                        var row = "Paid:" + item.Voucher.AmoutToLoad + "<br>";
-                        @row;
-                    }
+            @{
+                var isEnabled = "";
+                var val = "Cash-Out";
+                var note = "";
+                if (Model.Merchant.PayoutRequested)
+                {
+                    note = "(Pending Cash-Out)";
+                    isEnabled = "disabled";
+                    val = "Cash-Out Requested";
+                }
+                if (CashoutTotal.Equals(0))
+                {
+                    isEnabled = "disabled";
+                    val = "Cash-Out Unavailable";
+                }
+                <div class="border" style="margin: 30px 0 25px 0"></div>
+                <div class="grey_box" style="margin-bottom: 30px;">
+                    <div class="merchants_main_dv">
+                        <h2>Balance: @CashoutTotal @note</h2>
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" id="CashoutTotal" value="@CashoutTotal" />
+                        <input type="submit" value="@val" class="btn btn-default" @isEnabled />
+                        <div class="border" style="margin: 30px 0 25px 0"></div>
+                        <h2>History</h2>
+                        @foreach (var item in Model.Vouchers.Where(a => a.CashedOutToMerchant))
+                        {
+                            var row = "Cashed Out:" + item.AmoutToLoad + "on " + item.DatePaidout + "<br>";
+                            @row
+                        }
+                        @foreach (var item in Model.Vouchers.Where(a => !a.CashedOutToMerchant && a.MerchantSpentAtId.Equals(Guid.Parse(Model.Merchant.UserId))))
+                        {
+                            var row = "Voucher Spent " + item.AmoutToLoad + " on " + item.DatePaidout;
+                            <p>@row</p>
+                        }
+                    </div>
+                    <div class="merchants_shadow"></div><!--merchants_shadow-->
                 </div>
-                <div class="merchants_shadow"></div><!--merchants_shadow-->
-            </div><!--merchants_main_dv-->
-
+                <!--merchants_main_dv-->
+            }
     <div class="grey_box" style="margin-bottom: 30px;">
         <div class="merchants_main_dv">
             @using (Html.BeginForm())

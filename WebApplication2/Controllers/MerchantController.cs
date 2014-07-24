@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
@@ -74,14 +75,15 @@ namespace WebApplication2.Controllers
             return View(model);
         }
 
-        private List<VendorSpendModel> GetVouchersForMerchant(string userId)
+        private List<BuyVoucherViewModel> GetVouchersForMerchant(string userId)
         {
-            return db.VendorSpendModels.Where(d => d.Merchant.UserId.Equals(userId) && !d.Voucher.MerchantPaid).ToList();
+            var gUserId = Guid.Parse(userId);
+            return db.BuyVoucherViewModels.Where(d => d.MerchantSpentAtId.Equals(gUserId) && !d.CashedOutToMerchant && d.Spent).ToList();
         }
 
         public class MerchantDetailsViewModel
         {
-            public List<VendorSpendModel> Vouchers { get; set; }
+            public List<BuyVoucherViewModel> Vouchers { get; set; }
             public MerchantViewModel Merchant { get; set; }
         }
 
@@ -90,23 +92,60 @@ namespace WebApplication2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Manage([Bind(Include = "UserId,ImageUrl,WebsiteUrl,WebsiteName,WebsiteDescription,VendorSelect,VendorDetails,EmailAddress")] MerchantViewModel merchantviewmodel)
+        public ActionResult Manage([Bind(Include = "Merchant,Vouchers")] MerchantDetailsViewModel merchantviewmodel)
         {
+            merchantviewmodel.Vouchers = GetVouchersForMerchant(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
-                var merchant = db.MerchantViewModels.FirstOrDefault(i => i.UserId.Equals(merchantviewmodel.UserId));
-                merchant.ImageUrl = merchantviewmodel.ImageUrl;
-                merchant.WebsiteUrl = merchantviewmodel.WebsiteUrl;
-                merchant.WebsiteName = merchantviewmodel.WebsiteName;
-                merchant.WebsiteDescription = merchantviewmodel.WebsiteDescription;
-                merchant.VendorSelect = merchantviewmodel.VendorSelect;
-                merchant.VendorDetails = merchantviewmodel.VendorDetails;
-                merchant.EmailAddress = merchantviewmodel.EmailAddress;
-                merchant.Approved = false;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var merchant = db.MerchantViewModels.FirstOrDefault(i => i.UserId.Equals(merchantviewmodel.Merchant.UserId));
+                try { merchant.ImageUrl = merchantviewmodel.Merchant.ImageUrl; }
+                catch (Exception e) { }
+                try { merchant.WebsiteUrl = merchantviewmodel.Merchant.WebsiteUrl; }
+                catch (Exception e) { }
+                try { merchant.WebsiteName = merchantviewmodel.Merchant.WebsiteName; }
+                catch (Exception e) { }
+                try { merchant.WebsiteDescription = merchantviewmodel.Merchant.WebsiteDescription; }
+                catch (Exception e) { }
+                try { merchant.VendorSelect = merchantviewmodel.Merchant.VendorSelect; }
+                catch (Exception e) { }
+                try { merchant.VendorDetails = merchantviewmodel.Merchant.VendorDetails; }
+                catch (Exception e) { }
+                try { merchant.EmailAddress = merchantviewmodel.Merchant.EmailAddress; }
+                catch (Exception e) { }
+                try
+                {
+                    merchant.Approved = false;
+                    db.SaveChanges();
+                    merchantviewmodel.Merchant = merchant;
+                    return View(merchantviewmodel);
+                }
+                catch (Exception e) { return RedirectToAction("Index"); }
             }
+
             return View(merchantviewmodel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RequestCashOut(MerchantPost state)
+        {
+            try
+            {
+                var user = db.MerchantViewModels.FirstOrDefault(a => a.UserId.Equals(state.UserId));
+                user.PayoutRequested = state.CashoutRequested;
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Json(new { success = false, message = e.Message, exception = e.InnerException });
+            }
+            return Json(new { success = true });
+        }
+
+        public class MerchantPost
+        {
+            public Boolean CashoutRequested { get; set; }
+            public string UserId { get; set; }
         }
 
         // GET: /Merchant/Delete/5

@@ -34,7 +34,7 @@ namespace WebApplication2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateMerchantApproval(MerchantApprovalPost state)
+        public ActionResult UpdateMerchantApproval(MerchantPost state)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace WebApplication2.Controllers
             return Json(new { success = true });
         }
 
-        public class MerchantApprovalPost
+        public class MerchantPost
         {
             public Boolean Approved { get; set; }
             public string UserId { get; set; }
@@ -124,7 +124,7 @@ namespace WebApplication2.Controllers
             var model = new PayoutMerchantViewModel
             {
                 Merchants = db.MerchantViewModels.ToList(),
-                Vouchers = db.VendorSpendModels.ToList()
+                Vouchers = db.BuyVoucherViewModels.ToList()
             };
             return View(model);
         }
@@ -132,7 +132,7 @@ namespace WebApplication2.Controllers
         public class PayoutMerchantViewModel
         {
             public List<MerchantViewModel> Merchants { get; set; }
-            public List<VendorSpendModel> Vouchers { get; set; }
+            public List<BuyVoucherViewModel> Vouchers { get; set; }
         }
 
         //

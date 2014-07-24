@@ -53,7 +53,7 @@
                                 @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().Spent)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().MerchantPaid)
+                                @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().CashedOutToMerchant)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().LoadTxId)
@@ -97,7 +97,7 @@
                                     @Html.DisplayFor(modelItem => item.Spent)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.MerchantPaid)
+                                    @Html.DisplayFor(modelItem => item.CashedOutToMerchant)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.LoadTxId)

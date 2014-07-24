@@ -23,7 +23,13 @@
                             Vendor
                         </th>
                         <th>
+                            UserId
+                        </th>
+                        <th>
                             Payout Requested
+                        </th>
+                        <th>
+                            Email
                         </th>
                         <th>
                             Balance
@@ -33,13 +39,19 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.WebsiteName)
+                                <a href="@item.WebsiteUrl">@item.WebsiteName</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserId)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.PayoutRequested)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.EmailAddress)
+                            </td>
+                            <td>
+                                @Model.Vouchers.Where(v=>v.Paid && v.Spent && !v.CashedOutToMerchant).Sum(x => x.AmoutToLoad)
                             </td>
                         </tr>
                     }

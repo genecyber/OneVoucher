@@ -30,7 +30,7 @@ namespace WebApplication2.Models
 
         public Boolean Spent { get; set; }
 
-        public Boolean MerchantPaid { get; set; }
+        public Boolean CashedOutToMerchant { get; set; }
 
         public string LoadTxId { get; set; }
 
@@ -41,5 +41,16 @@ namespace WebApplication2.Models
         [DataType(DataType.EmailAddress)]
         [Required]
         public String EmailAddress { get; set; }
+
+        public Guid MerchantSpentAtId { get; set; }
+
+        [Display(Name = "Date of Purchase"), DataType(DataType.Date)]
+        public DateTime DateOfPurchase { get; set; }
+
+        [Display(Name = "Date Spent"), DataType(DataType.Date)]
+        public DateTime? DateSpent { get; set; }
+
+        [Display(Name = "Date CashedOut"), DataType(DataType.Date)]
+        public DateTime? DatePaidout { get; set; }
     }
 }

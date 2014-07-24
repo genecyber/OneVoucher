@@ -36,7 +36,11 @@ input[type='text'], input[type='email'],input[type='password'],input[type='url']
 #WebsiteDescription,
 #VendorDetails,
 #Sauce,
-#Secret{
+#Secret,
+.form-group > div > input.text-box,
+.form-group > div > select,
+#Merchant_ImageUrl,
+#MerchantSpentAtId{
     width: 374px;
     height: 38px;
     float: left;

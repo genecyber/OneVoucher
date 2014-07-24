@@ -76,6 +76,7 @@ namespace WebApplication2.Controllers
             {
                 buyvoucherviewmodel.VoucherGuid = Guid.NewGuid();
                 buyvoucherviewmodel.Id = Guid.NewGuid();
+                buyvoucherviewmodel.DateOfPurchase = DateTime.Now;
                 db.BuyVoucherViewModels.Add(buyvoucherviewmodel);
                 db.SaveChanges();
                 TempData["pay"] =  buyvoucherviewmodel;

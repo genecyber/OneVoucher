@@ -37,7 +37,7 @@ namespace WebApplication2.Models
         public Vendor VendorSelect { get; set; }
 
         [DataType(DataType.Text)]
-        [DisplayName("Vendor Details")]
+        [DisplayName("Cashout Details")]
         public string VendorDetails { get; set; }
 
         [DataType(DataType.EmailAddress)]

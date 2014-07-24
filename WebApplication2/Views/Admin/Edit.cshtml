@@ -77,6 +77,14 @@
                                 @Html.ValidationMessageFor(model => model.EmailAddress)
                             </div>
                         </div>
+                        
+                        <div class="form-group clear">
+                            @Html.LabelFor(model => model.MerchantSpentAtId, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MerchantSpentAtId)
+                                @Html.ValidationMessageFor(model => model.MerchantSpentAtId)
+                            </div>
+                        </div>
 
                         <div class="form-group clear">
                             <div class="col-md-offset-2 col-md-10">
