@@ -46,6 +46,7 @@ namespace WebApplication2.Models
         public string EmailAddress { get; set; }
 
         public Boolean Approved { get; set; }
+        public Boolean PayoutRequested { get; set; }
     }
 
 }

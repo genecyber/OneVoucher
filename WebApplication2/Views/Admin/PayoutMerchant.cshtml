@@ -1,0 +1,54 @@
+﻿@model WebApplication2.Controllers.AdminController.PayoutMerchantViewModel
+
+@{
+    ViewBag.Title = "PayoutMerchant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $("a:contains('Hello ')").addClass("active");
+    });
+</script>
+
+<div class="main">
+    <div class="content_box">
+        <h2>Select Merchant</h2>
+        <div class="border" style="margin: 0 0 25px 0"></div>
+        <div class="grey_box" style="margin-bottom: 30px;">
+            <div class="merchants_main_dv">
+                <table class="table">
+                    <tr style="font-size: 60%; font-weight: bold;">
+                        <th>
+                            Vendor
+                        </th>
+                        <th>
+                            Payout Requested
+                        </th>
+                        <th>
+                            Balance
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.Merchants.ToList())
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.WebsiteName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PayoutRequested)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmailAddress)
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            </div>
+            <div class="merchants_shadow"></div>
+        </div>
+
+    </div>
+    <div class="box_shadow"></div>
+</div>

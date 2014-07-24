@@ -34,7 +34,7 @@
             <h2>Admin</h2>
             <div class="border" style="margin: 0 0 25px 0"></div>
             <p>
-                @Html.ActionLink("Create New Voucher", "Create")
+                @Html.ActionLink("Create New Voucher", "Create")  | @Html.ActionLink("Payouts", "PayoutMerchant")
             </p>
             <div class="grey_box" style="margin-bottom: 30px;">
                 <div class="merchants_main_dv">
@@ -112,7 +112,6 @@
                                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                                     @Html.ActionLink("Details", "AdminVoucherDetails", new { id = item.Id }) |
                                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                    @Html.ActionLink("Payout", "Payout", new { id = item.Id })
                                 </td>
                             </tr>
                         }

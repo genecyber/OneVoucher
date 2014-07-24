@@ -118,6 +118,24 @@ namespace WebApplication2.Controllers
         }
 
         //
+        // GET: /Admin/PayoutMerchant
+        public ActionResult PayoutMerchant()
+        {
+            var model = new PayoutMerchantViewModel
+            {
+                Merchants = db.MerchantViewModels.ToList(),
+                Vouchers = db.VendorSpendModels.ToList()
+            };
+            return View(model);
+        }
+
+        public class PayoutMerchantViewModel
+        {
+            public List<MerchantViewModel> Merchants { get; set; }
+            public List<VendorSpendModel> Vouchers { get; set; }
+        }
+
+        //
         // GET: /Admin/Payout/5
         public ActionResult Payout(Guid id)
         {
