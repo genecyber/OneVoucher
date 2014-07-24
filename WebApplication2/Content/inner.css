@@ -1,0 +1,300 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300,300italic&subset=latin,cyrillic-ext,latin-ext,cyrillic,greek-ext,greek,vietnamese);
+
+
+
+html, body{
+	margin:0;
+	padding:0;
+}
+
+input[type='text'], input[type='email'],input[type='password'],input[type='url'],select{
+	width:100%;
+	height:35px;
+	border:1px solid #cccccc;
+	box-shadow:inset 2px 2px 5px 0 rgba(0,0,0,0.1);
+	padding:0 5px;
+}
+
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
+#VoucherGuid,
+#EmailAddress,
+#LoadTxId,
+#VendorSelect,
+#WebsiteName,
+#ImageUrl,
+#WebsiteUrl,
+#WebsiteDescription,
+#VendorDetails,
+#Sauce,
+#Secret{
+    width: 374px;
+    height: 38px;
+    float: left;
+    color: #356f95;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+textarea{
+	width:100%;
+	min-height:80px;
+	border:1px solid #cccccc;
+	box-shadow:inset 2px 2px 5px 0 rgba(0,0,0,0.1);
+	padding:0 5px;
+}
+a.button,input[type='button'],input[type='submit'],input[type='reset']{
+	/*border:1px solid #7d99ca;
+	-webkit-border-radius: 3px; 
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+	font-weight:bold; 
+	font-family:arial, helvetica, sans-serif; */
+	border:none; 
+	padding: 7px 27px; 
+	text-decoration:none; 
+	display:inline-block;
+    float: right;
+	font-size:18px;
+	font-weight:500;
+	font-family:"Open Sans", sans-serif;
+	color: #FFFFFF;
+	cursor:pointer;
+ 	background-color: #a5b8da; 
+ 	background-image: -webkit-gradient(linear, left top, left bottom, from(#154b6d), to(#508fb8));
+ 	background-image: -webkit-linear-gradient(top, #154b6d, #508fb8);
+ 	background-image: -moz-linear-gradient(top, #154b6d, #508fb8);
+ 	background-image: -ms-linear-gradient(top, #154b6d, #508fb8);
+ 	background-image: -o-linear-gradient(top, #154b6d, #508fb8);
+ 	background-image: linear-gradient(to bottom, #154b6d, #508fb8);
+ 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#154b6d, endColorstr=#508fb8);
+}
+
+
+a.button:hover,input[type='button']:hover,input[type='submit']:hover,input[type='reset']:hover{
+ 	background-color: #508fb8; 
+ 	background-image: -webkit-gradient(linear, left top, left bottom, from(#508fb8), to(#154b6d));
+ 	background-image: -webkit-linear-gradient(top, #508fb8, #154b6d);
+ 	background-image: -moz-linear-gradient(top, #508fb8, #154b6d);
+ 	background-image: -ms-linear-gradient(top, #508fb8, #154b6d);
+ 	background-image: -o-linear-gradient(top, #508fb8, #154b6d);
+ 	background-image: linear-gradient(to bottom, #508fb8, #154b6d);
+ 	filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#508fb8, endColorstr=#154b6d);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+h5{
+	color:#333333;
+	font-size:18px;
+	font-weight:600;
+	margin:10px 0 20px;
+	font-family:"Open Sans", sans-serif;
+}
+
+
+
+.grey_box{
+	width:100%;
+	min-height:50px;
+	float:left;
+	background:#f2f2f2;
+	margin: 0px 0px 30px 0px;
+	border-radius:5px;
+	padding:20px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-family:"Open Sans", sans-serif;
+	color:#333;
+}
+
+
+.Ammount{margin:10px 0 0 0; font-size:16px; font-weight:600; font-family:"Open Sans", sans-serif; color:#333;}
+.Ammount_max {margin:40px 0 0 0; font-size:16px; font-weight:600; font-family:"Open Sans", sans-serif; color:#333;}
+
+.Ammount_maxbox{width:220px; float:left; font-family:"Open Sans", sans-serif; color:#333;}
+	
+
+.form-horizontal {
+    font-size:16px; font-weight:600; font-family:"Open Sans", sans-serif;color: #333;
+}
+
+.Ammount input[type='text']{
+	width:268px;
+	height:35px;
+	border:1px solid #cccccc;
+	box-shadow:inset 2px 2px 5px 0 rgba(0,0,0,0.1);
+	font-family:"Open Sans", sans-serif;
+	color:#333;
+}
+
+.Ammount input[type='number'],
+#AmoutToLoad{
+	width:268px;
+	height:35px;
+	border:1px solid #cccccc;
+	box-shadow:inset 2px 2px 5px 0 rgba(0,0,0,0.1);
+	font-family:"Open Sans", sans-serif;
+	color:#333;
+    
+    padding-left: 15px;
+}
+
+input[type=checkbox]:not(old):not(.check-box),
+input[type=radio   ]:not(old){
+  width     : 2em;
+  margin    : 0;
+  padding   : 0;
+  font-size : 1em;
+  opacity   : 0;
+  display:none;
+}
+
+input[type=checkbox]:not(old) + label,
+input[type=radio   ]:not(old) + label{
+  display      : inline-block;
+  line-height  : 1.5em;
+  float:left;
+}
+
+input[type=checkbox]:not(old) + label > span,
+input[type=radio   ]:not(old) + label > span{
+  display          : inline-block;
+  width            : 0.875em;
+  height           : 0.875em;
+  margin           : 0.25em 0.5em 0.25em 0.25em;
+  border           : 0.0625em solid rgb(192,192,192);
+  border-radius    : 0.25em;
+  background       : rgb(224,224,224);
+  background-image :    -moz-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :     -ms-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :      -o-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image : -webkit-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :         linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  vertical-align   : bottom;
+}
+
+input[type=checkbox]:not(old):checked + label > span,
+input[type=radio   ]:not(old):checked + label > span{
+  background-image :    -moz-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :     -ms-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :      -o-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image : -webkit-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :         linear-gradient(rgb(224,224,224),rgb(240,240,240));
+}
+
+input[type=checkbox]:not(old):checked + label > span:before{
+  content     : '✓';
+  display     : block;
+  width       : 1em;
+  color       : rgb(25,80,114);
+  font-size   : 0.875em;
+  line-height : 1em;
+  text-align  : center;
+  /*text-shadow : 0 0 0.0714em rgb(115,153,77);*/
+  font-weight : bold;
+}
+
+input[type=radio]:not(old):checked +  label > span > span{
+  display          : block;
+  width            : 0.5em;
+  height           : 0.5em;
+  margin           : 0.125em;
+  border           : 0.0625em solid rgb(115,153,77);
+  border-radius    : 0.125em;
+  background       : rgb(153,204,102);
+  background-image :    -moz-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image :     -ms-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image :      -o-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image : -webkit-linear-gradient(rgb(179,217,140),rgb(153,204,102));
+  background-image :         linear-gradient(rgb(179,217,140),rgb(153,204,102));
+}
+
+.pclass{
+	float:left; 
+	width:350px; 
+	margin:0; 
+	font-size:12px; 
+	color:#666666;
+	font-family:"Open Sans", sans-serif;
+}
+
+
+/*contact us*/
+
+.contact_wra{
+}
+
+.contact_left{
+	width:577px;
+	min-height:50px;
+	float:left;
+	background:#f2f2f2;
+	margin: 0px 0px 30px 0px;
+	border-radius:5px;
+	padding:20px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-family:"Open Sans", sans-serif;
+	color:#333;
+}
+
+.contact_in{width:100%;	float:left; font-family:"Open Sans", sans-serif;color:#333; margin:0 0 20px 0;}
+.contact_in label{float:left; font-family:"Open Sans", sans-serif; color:#333; font-size:16px; width:125px; line-height:34px;}
+
+
+
+
+.contact_right{
+	float:right;
+	font-family:"Open Sans", sans-serif;
+	color:#666666;
+	font-size:12px;
+}
+
+.contact_right b{
+	color:#333333;
+	font-size:16px;
+	font-weight:600;
+	font-family:"Open Sans", sans-serif;
+	margin:0 10px 0 0;
+}
+	
+.clear{clear:both;}
+
+
+.map{width:898px; height:340px; background:#fff; border:1px solid #dedede; padding:10px; border-radius:10px; margin: 0 0 69px 0}
+
+
+
+
+/*contact us*/
+
+
+
+
+
+
+

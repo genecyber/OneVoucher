@@ -1,0 +1,144 @@
+﻿@using WebApplication2.Helpers
+@model WebApplication2.Controllers.MerchantController.MerchantDetailsViewModel
+
+@{
+    ViewBag.Title = "Manage Profile";
+}
+<script>
+    $(document).ready(function () {
+        $("a:contains('Merchants')").addClass("active");
+    });
+</script>
+<div class="main">
+    <div class="content_box">
+        <div class="col-md-12">
+            <h2>Manage Merchant Profile</h2>
+            <p>
+                Looking for the @Html.ActionLink("Merchant Integration", "Manage", "Merchant") Page?
+            </p>
+            <div class="border" style="margin: 30px 0 25px 0"></div>
+            <div class="grey_box" style="margin-bottom: 30px;">
+                <div class="merchants_main_dv">
+                    <h2>Balance: @Model.Vouchers.Where(m=> !m.Voucher.MerchantPaid).GroupBy(x => x.Voucher.Id, x=> x.Voucher.AmoutToLoad).Select(x => new { Type = x.Key, SubTotal = x.Sum() }).FirstOrDefault()</h2>
+                    <input type="submit" value="Cash-Out" class="btn btn-default" />
+                    <div class="border" style="margin: 30px 0 25px 0"></div>
+                    <h2>History</h2>
+                    @foreach (var item in Model.Vouchers.Where(a => a.Voucher.MerchantPaid))
+                    {
+                        var row = "Paid:" + item.Voucher.AmoutToLoad + "<br>";
+                        @row;
+                    }
+                </div>
+                <div class="merchants_shadow"></div><!--merchants_shadow-->
+            </div><!--merchants_main_dv-->
+
+    <div class="grey_box" style="margin-bottom: 30px;">
+        <div class="merchants_main_dv">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Merchant.UserId)
+
+                    @*<div class="form-group clear">
+                            @Html.LabelFor(model => model.SecretSauce, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SecretSauce)
+                                @Html.ValidationMessageFor(model => model.SecretSauce)
+                            </div>
+                        </div>*@
+
+                    <div class="form-group clear">
+                        <label class="control-label col-md-2" for="Sauce">Sauce</label>
+                        <div class="col-md-10">
+                            <input class="text-box single-line disabled" id="Sauce" name="Sauce" type="text" alt="@Model.Merchant.SecretSauce" value="@Model.Merchant.SecretSauce.ToString().Substring(5, 31)" disabled="disabled">
+                        </div>
+                    </div>
+
+                    <div class="form-group clear">
+                        <label class="control-label col-md-2" for="Secret">Secret</label>
+                        <div class="col-md-10">
+                            <input class="text-box single-line disabled" id="Secret" name="Secret" type="text" value="@Model.Merchant.SecretSauce.ToString().Substring(0, 5)" disabled="disabled">
+                        </div>
+                    </div>
+
+                    <div class="form-group clear">
+                        @Html.LabelFor(model => model.Merchant.ImageUrl, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Merchant.ImageUrl)
+                            @Html.ValidationMessageFor(model => model.Merchant.ImageUrl)
+                        </div>
+                    </div>
+
+                    <div class="form-group clear">
+                        @Html.LabelFor(model => model.Merchant.WebsiteUrl, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Merchant.WebsiteUrl)
+                            @Html.ValidationMessageFor(model => model.Merchant.WebsiteUrl)
+                        </div>
+                    </div>
+
+                    <div class="form-group clear">
+                        @Html.LabelFor(model => model.Merchant.WebsiteName, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Merchant.WebsiteName)
+                            @Html.ValidationMessageFor(model => model.Merchant.WebsiteName)
+                        </div>
+                    </div>
+
+                    <div class="form-group clear">
+                        @Html.LabelFor(model => model.Merchant.WebsiteDescription, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Merchant.WebsiteDescription)
+                            @Html.ValidationMessageFor(model => model.Merchant.WebsiteDescription)
+                        </div>
+                    </div>
+
+                    <div class="form-group clear">
+                        @Html.LabelFor(model => model.Merchant.VendorSelect, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EnumDropDownListFor(model => model.Merchant.VendorSelect)
+                            @Html.ValidationMessageFor(model => model.Merchant.VendorSelect)
+                        </div>
+                    </div>
+
+                    <div class="form-group clear">
+                        @Html.LabelFor(model => model.Merchant.VendorDetails, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Merchant.VendorDetails)
+                            @Html.ValidationMessageFor(model => model.Merchant.VendorDetails)
+                        </div>
+                    </div>
+
+                    <div class="form-group clear">
+                        @Html.LabelFor(model => model.Merchant.EmailAddress, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Merchant.EmailAddress)
+                            @Html.ValidationMessageFor(model => model.Merchant.EmailAddress)
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+        <div class="merchants_shadow"></div><!--merchants_shadow-->
+    </div><!--merchants_main_dv-->
+
+</div><!--grey_box-->
+            </div><!--content_box-->
+        </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,82 @@
+﻿<script>
+    $(document).ready(function () {
+        $("a:contains('Home')").addClass("active");
+    });
+</script>
+<div class="main">
+    <div class="slider_box">
+        <img src="~/Images/banner-1.jpg" border="0" usemap="#Map2">
+        <map name="Map2">
+            <area shape="rect" coords="37,202,216,251" href="@Url.Action("Buy", "BuyVoucher" )">
+        </map>
+    </div><!--slider_box-->
+    <div class="slide_shadow"></div><!--box_shadow-->
+    <div class="content_box">
+        <center><h2>Welcome to One-Voucher</h2></center>
+        <p style="text-align:center;">The only digital payment method that you'll need. Widely accepted and available using countless payment options, One Voucher allows you to pay your way, while simplifying the process for merchants. </p>
+        <div class="border"></div>
+        <div class="grey_box" style="margin-top:30px;">
+            <center><h2>How It Works</h2></center>
+
+            <div class="icon_box" style="margin-left:40px;">
+                <div class="home_icon_dv">
+                    <a href="@Url.Action("Buy","BuyVoucher")"><img src="~/Images/icon-1.png" id="Image1" onmouseover="MM_swapImage('Image1','','../Images/icon-1-hover.png',1)" onmouseout="MM_swapImgRestore()"></a>
+                </div><!--home_icon_dv-->
+                <h3>Buy Voucher</h3>
+                <div class="icon_text_dv">
+                    You Buy A Voucher<br>
+                    Using the payment method
+                    of your choice!
+                </div><!--icon_text_dv-->
+                <div class="icon_text_dv_shed"></div>
+            </div><!--icon_box-->
+
+            <div class="icon_arrow_1"></div><!--icon_arrow_1-->
+
+            <div class="icon_box">
+                <div class="home_icon_dv">
+                    <a href="@Url.Action("Index","Merchant")"><img src="~/Images/icon-2.png" id="Image2" onmouseover="MM_swapImage('Image2','','../Images/icon-2-hover.png',1)" onmouseout="MM_swapImgRestore()"></a>
+                </div><!--home_icon_dv-->
+                <h3>Spend Voucher</h3>
+                <div class="icon_text_dv">
+                    Spend your voucher<br>
+                    on any website that accepts
+                    One Voucher
+                </div><!--icon_text_dv-->
+                <div class="icon_text_dv_shed"></div>
+            </div><!--icon_box-->
+
+            <div class="icon_arrow_2"></div><!--icon_arrow_2-->
+
+            <div class="icon_box">
+                <div class="home_icon_dv">
+                    <a href="@Url.Action("Register","Account")"><img src="~/Images/icon-3.png" id="Image3" onmouseover="MM_swapImage('Image3','','../Images/icon-3-hover.png',1)" onmouseout="MM_swapImgRestore()"></a>
+                </div><!--home_icon_dv-->
+                <h3>Payment Option</h3>
+                <div class="icon_text_dv">
+                    The merchant receives<br>
+                    payment, using the payment
+                    option of their choice.
+                </div><!--icon_text_dv-->
+                <div class="icon_text_dv_shed"></div>
+            </div><!--icon_box-->
+        </div><!--grey_box-->
+        <div class="border" style="margin-bottom:50px;"></div>
+        <center><h2>Payment Options</h2></center>
+        <div class="pay_logo">
+            <ul>
+                <li><a href="#"><img src="~/Images/payment-icon-1.jpg"></a></li>
+                <li><a href="#"><img src="~/Images/payment-icon-2.jpg"></a></li>
+                <li><a href="#"><img src="~/Images/payment-icon-3.jpg"></a></li>
+                <li><a href="#"><img src="~/Images/payment-icon-4.jpg"></a></li>
+                <li><a href="#"><img src="~/Images/payment-icon-5.jpg"></a></li>
+                <li><a href="#"><img src="~/Images/payment-icon-6.jpg"></a></li>
+                <li><a href="#"><img src="~/Images/payment-icon-7.jpg"></a></li>
+                <li><a href="#"><img src="~/Images/payment-icon-8.jpg"></a></li>
+                <li><a href="#"><img src="~/Images/payment-icon-9.jpg"></a></li>
+            </ul>
+        </div><!--pay_logo-->
+
+    </div><!--content_box-->
+    <div class="box_shadow"></div><!--box_shadow-->
+</div>

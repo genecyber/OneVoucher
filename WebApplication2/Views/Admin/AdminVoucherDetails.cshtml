@@ -1,0 +1,72 @@
+﻿@model WebApplication2.Models.BuyVoucherViewModel
+
+@{
+    ViewBag.Title = "Admin Voucher Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main">
+    <div class="content_box">
+        <h2>Details</h2>
+        <div class="border" style="margin: 0 0 25px 0"></div>
+
+        <div class="grey_box" style="margin-bottom: 30px;">
+            <div class="merchants_main_dv">
+                <div>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.VendorSelect)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.VendorSelect)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.AmoutToLoad)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.AmoutToLoad)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Paid)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Paid)
+                        </dd>
+                        
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Spent)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LoadTxId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LoadTxId)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.VoucherGuid)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.VoucherGuid)
+                        </dd>
+
+                    </dl>
+                </div>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+            <div class="merchants_shadow"></div>
+        </div>
+    </div>
+    <div class="box_shadow"></div>
+</div>

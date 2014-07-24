@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@*<h2>Buy</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Vendor }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Vendor })
+        </td>
+    </tr>
+}
+
+</table>*@
+<script>
+    $(document).ready(function () {
+        $("a:contains('Buy Voucher')").addClass("active");
+    });
+</script>
+<div class="main">
+    <!--<div class="slider_box"><img src="images/banner-1.jpg"></div>slider_box-->
+    <!--<div class="slide_shadow"></div>box_shadow-->
+    <div class="content_box">
+        <h2>Buy Voucher</h2>
+
+
+        <div class="border" style="margin:0 0 15px 0"></div>
+
+
+        <form action="" method="get">
+
+            <h5>Voucher Ammount</h5>
+            <div class="grey_box">
+                <div class="Ammount">Ammount : &nbsp;&nbsp; $ &nbsp;&nbsp;<input name="" type="text"> </div>
+                <div class="Ammount_max"><span class="Ammount_maxbox">Minimum : &nbsp;&nbsp;$50</span><span class="Ammount_maxbox">Maximum  : &nbsp;&nbsp;$999</span></div>
+            </div><!--grey_box-->
+
+
+
+            <h5>Choose Payment Method</h5>
+            <div class="grey_box">
+                <div class="Ammount">
+                    <select size="1" style="width:268px; margin:0 0 15px 0" ;="">
+                        <option selected=""> Perfect Money</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </div>
+            </div><!--grey_box-->
+
+
+
+
+            <h5>Confirmation</h5>
+            <div class="grey_box">
+                <div class="Ammount">
+                    <input id="checkbox2" type="checkbox" name="checkbox" value="2"><label for="checkbox2"><span></span></label>
+                    <p class="pclass">Please confirm the above. Upon completion, you will be forwarded to the appropriate payment processor and will then receive your voucher upon payment receipt. </p>
+                </div>
+            </div><!--grey_box-->
+
+
+
+            <input name="" type="submit" value="Submit" style="margin:0 0 65px 0">
+
+
+        </form>
+
+
+        <div class="border" style="margin:30px 0 15px 0"></div>
+
+
+
+
+    </div><!--content_box-->
+    <div class="box_shadow"></div><!--box_shadow-->
+</div>
+

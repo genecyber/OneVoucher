@@ -1,0 +1,116 @@
+﻿@using WebApplication2.Helpers
+@using WebApplication2.Models
+@model BuyVoucherViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+<script>
+    $(document).ready(function () {
+        $("a:contains('Buy Voucher')").addClass("active");
+        $("form").submit(function(e) {
+            if ($("[type='checkbox']:checked").length < 1) {
+                e.preventDefault();
+                alert('Please confirm you understand.');
+            }
+            return true;
+        });
+        $("#VendorSelect").change(function () {
+            if ($(this).val() == "Bank" || $(this).val() == "InteracETransfer") {
+                $("#PaymentNote").show();
+                $("#Note").show();
+                $("#Note").html("Note");
+                $("#PaymentNote").html("Coming soon");
+                $("#ConfirmBox").hide();
+                $("#Email").hide();
+                $("#Buy").hide();
+            }
+            else if ($(this).val() == "WesternUnion" || $(this).val() == "WebMoney" || $(this).val() == "MoneyGram") {
+                $("#PaymentNote").show();
+                $("#PaymentNote").html("Your Voucher will be delivered by email.");
+                $("#Note").show();
+                $("#Note").html("Email Address");
+                $("#Email").show();
+                $("#ConfirmBox").show();
+                $("#Buy").show();
+            }
+            else{
+                $("#PaymentNote").hide();
+                $("#Note").hide();
+                $("#Email").show();
+                $("#ConfirmBox").show();
+                $("#Buy").show();
+            }
+        });
+    });
+</script>
+<div class="main">
+    <!--<div class="slider_box"><img src="images/banner-1.jpg"></div>slider_box-->
+    <!--<div class="slide_shadow"></div>box_shadow-->
+    <div class="content_box">
+        <h2>Buy Voucher</h2>
+    
+    
+
+        <div class="border" style="margin:0 0 15px 0"></div>
+
+
+        @using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+
+            <h5>Voucher Ammount</h5>
+            <div class="grey_box">
+                <div class="Ammount">
+                    <!--Ammount : &nbsp;&nbsp; $ &nbsp;&nbsp;<input name="" type="text">-->
+                    @Html.EditorFor(m => m.AmoutToLoad)
+                    @Html.ValidationMessageFor(m => m.AmoutToLoad)
+                </div>
+                <div class="Ammount_max"><span class="Ammount_maxbox">Minimum : &nbsp;&nbsp;$50</span><span class="Ammount_maxbox">Maximum  : &nbsp;&nbsp;$999</span></div>
+            </div><!--grey_box-->
+
+            <h5>Choose Payment Method</h5>
+            <div class="grey_box">
+                <div class="Ammount">
+                    @Html.EnumDropDownListFor(m => m.VendorSelect)
+                </div>
+            </div><!--grey_box-->
+    <h5 id="Note" style="display:none"></h5>
+            <div class="grey_box" id="PaymentNote" style="display:none">
+                
+            </div>
+            <h5>Email Address</h5>
+            <div class="grey_box" id="Email" >
+                <div class="Ammount">
+                    <!--Ammount : &nbsp;&nbsp; $ &nbsp;&nbsp;<input name="" type="text">-->
+                    @Html.EditorFor(m => m.EmailAddress)
+                    @Html.ValidationMessageFor(m => m.EmailAddress)
+                </div>
+           </div><!--grey_box-->
+            
+            <div class="grey_box" id="ConfirmBox">
+                <div class="Ammount">
+                    <input id="checkbox2" type="checkbox" name="checkbox" value="2"><label for="checkbox2"><span></span></label>
+                    <p class="pclass">Please confirm you understand the following. Upon completion, you will be forwarded to the appropriate payment processor and will then receive your voucher upon payment receipt. </p>
+                </div>
+            </div><!--grey_box-->
+
+
+
+            <input id="Buy" type="submit" value="Buy" style="margin:0 0 65px 0">
+
+
+    }
+
+
+        <div class="border" style="margin:30px 0 15px 0"></div>
+
+
+
+
+    </div><!--content_box-->
+    <div class="box_shadow"></div><!--box_shadow-->
+</div>
+ @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

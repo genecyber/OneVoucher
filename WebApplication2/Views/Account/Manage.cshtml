@@ -1,0 +1,40 @@
+﻿@using WebApplication2.Models;
+@using Microsoft.AspNet.Identity;
+@using WebApplication2.Controllers.
+@{
+    ViewBag.Title = "Manage Account";
+}<script>
+    $(document).ready(function () {
+        $("a[title='Manage']").addClass("active");
+    });
+</script>
+
+<div class="main">
+<div class="content_box">
+    <div class="col-md-12">
+        <h2>Merchant Login</h2>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>You're logged in as <strong>@User.Identity.GetUserName()</strong>. Looking for the @Html.ActionLink("Manage Merchant Profile", "Manage", "Merchant") Page?</p>
+        }
+        
+
+        <div class="border" style="margin:0 0 25px 0"></div>
+        @if (ViewBag.HasLocalPassword)
+        {
+            @Html.Partial("_ChangePasswordPartial")
+        }
+        else
+        {
+            @Html.Partial("_SetPasswordPartial")
+        }
+
+        @*<section id="externalLogins">
+                    @Html.Action("RemoveAccountList")
+                    @Html.Partial("_ExternalLoginsListPartial", new { Action = "LinkLogin", ReturnUrl = ViewBag.ReturnUrl })
+                </section>*@
+    </div>
+</div></div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

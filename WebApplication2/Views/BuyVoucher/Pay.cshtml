@@ -1,0 +1,62 @@
+﻿@using WebApplication2.Helpers
+@using WebApplication2.Models
+@model BuyVoucherViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>BuyVoucherViewModel</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VendorSelect, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VendorSelect)
+                    @Html.ValidationMessageFor(model => model.VendorSelect)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AmoutToLoad, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AmoutToLoad)
+                    @Html.ValidationMessageFor(model => model.AmoutToLoad)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+*@
+<script>
+    $(document).ready(function () {
+        $("a:contains('Buy Voucher')").addClass("active");
+    });
+</script>
+<div class="main">
+    <!--<div class="slider_box"><img src="images/banner-1.jpg"></div>slider_box-->
+<!--<div class="slide_shadow"></div>box_shadow-->
+<div class="content_box">
+        <h2>Pay for Voucher</h2>
+
+    <p>@Model.VoucherGuid</p>
+
+        <div class="border" style="margin:0 0 15px 0"></div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

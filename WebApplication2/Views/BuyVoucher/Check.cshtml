@@ -1,0 +1,85 @@
+﻿@using System.Activities.Statements
+@model WebApplication2.Models.BuyVoucherViewModel
+
+@{
+    ViewBag.Title = "Check Voucher Balance";
+}
+
+@*<h2>Check Balance</h2>
+
+<div>
+    <h4>Voucher</h4>
+	<hr />
+    <dl class="dl-horizontal">
+
+
+    </dl>
+</div>
+<p>
+    
+</p>*@
+<script>
+    $(document).ready(function () {
+        $("a:contains('Check Balance')").addClass("active");
+        $("#VoucherGuid").attr("placeholder", "00000000-0000-0000-0000-000000000000");
+    });
+</script>
+<div class="main">
+    <!--<div class="slider_box"><img src="~/Images/banner-1.jpg"></div>slider_box-->
+    <!--<div class="slide_shadow"></div>box_shadow-->
+    <div class="content_box">
+        <h2>Check Voucher Balance</h2>
+
+
+        <div class="border" style="margin:0 0 25px 0"></div>
+
+
+
+
+        <div class="grey_box" style="margin-bottom:0">
+            <div class="voucher_code_dv">
+                <p style="text-align: center">Please type your voucher code into the box below. We will then confirm whether or not the voucher code is valid, and the current amount available on the voucher. </p>
+                <div class="code_submit_dv">
+                @using (Html.BeginForm())
+                {
+                        @Html.AntiForgeryToken()
+                        @Html.EditorFor(model => model.VoucherGuid)
+                                            @*Html.ValidationMessageFor(model => model.VoucherGuid)*@
+                                            @*<input type="text" style="width:374px; height:38px; float:left; color:#356f95; font-style:italic; font-weight:600; font-size:16px;" placeholder="Type your voucher code...">*@
+                 <input name="" type="submit" value="Submit" style="margin:0 0 0 5px; padding: 7px 11px; float:left;" />
+                 }
+                </div><div class="clearfix"></div>
+                <div style="float:none">
+                    @if (Model != null)
+                    {
+                        if (!Model.Paid || Model.AmoutToLoad == 0)
+                         {
+                             <div style="text-align: center; color: red; padding-top: 10px; padding-bottom: 10px;">This is an invalid or non funded voucher.</div>
+                         }
+                         else if (Model.Paid && Model.Spent)
+                         {
+                             <div style="text-align: center; color: red; padding-top: 10px; padding-bottom: 10px;">This is a spent voucher.</div>
+                         }
+                        else if (Model.Paid && !Model.Spent)
+                         {
+                             <div style="font-weight: bold; text-align: center; padding-top: 10px; padding-bottom: 10px;">This Voucher has a value of: $@Model.AmoutToLoad</div>
+                         }
+                    }
+                </div>
+            </div>
+            <div class="code_dv_shadow"></div><!--code_dv_shadow-->
+        </div><!--grey_box-->
+
+
+
+
+
+
+        <div class="border" style="margin:30px 0 25px 0"></div>
+
+
+
+
+    </div><!--content_box-->
+    <div class="box_shadow"></div><!--box_shadow-->
+</div>

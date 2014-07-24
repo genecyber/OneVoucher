@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebApplication2.Models.MerchantViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+    <script>
+        $(document).ready(function() {
+            $("a:contains('Merchants')").addClass("active");
+        });
+    </script>
+    <div class="main">
+        <!--<div class="slider_box"><img src="~/Images/banner-1.jpg"></div>slider_box-->
+        <!--<div class="slide_shadow"></div>box_shadow-->
+        <div class="content_box">
+            <h2>Merchants Who Accept OneVoucher</h2>
+            <p>
+                Looking for the 
+                @if (!Request.IsAuthenticated)
+                {
+                    @Html.ActionLink("Merchant Login", "Login", "Account")
+                }
+                else
+                {
+                    @Html.ActionLink("Manage Merchant Profile", "Manage","Merchant")
+                }
+                Page?
+            </p>
+            <div class="border" style="margin: 0 0 25px 0"></div>
+            <p>The only digital payment method that you'll need. Widely accepted and available using countless payment options, One Voucher allows you to pay your way, while simplifying the process for merchants. </p>
+
+            <div class="grey_box" style="margin-bottom: 30px;">
+                <div class="merchants_main_dv">
+
+                    @foreach (var item in Model.Where(a=>a.Approved))
+                    {
+
+                        <div class="merchants_row">
+                            <div class="merchants_logo_dv">
+                                <a href="@item.WebsiteUrl"><img width="185" height="85" src="@item.ImageUrl"></a>
+                            </div><!--merchants_logo_dv-->
+                            <div class="merchants_name_dv">
+                                <h3>@item.WebsiteName</h3>
+                            <p>@item.WebsiteDescription</p>
+                            </div><!--merchants_name_dv-->
+                        </div>
+                        <!--merchants_row-->
+                     
+                    }
+
+                    <div style="float: right;">
+
+                        <ul class="pagination">
+                            <li class="disabled"><a href="#">«</a></li>
+                            <li class="active"><a href="#">1 <span class="sr-only"></span></a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+
+                    </div>
+
+                </div><!--merchants_main_dv-->
+                <div class="merchants_shadow"></div><!--merchants_shadow-->
+            </div><!--grey_box-->
+
+
+
+
+
+
+            <div class="border" style="margin: 30px 0 25px 0"></div>
+
+
+
+
+        </div><!--content_box-->
+        <div class="box_shadow"></div><!--box_shadow-->
+    </div>
+@*
+}
+else
+{
+    <h2>You must be logged in.</h2>
+    @Html.Partial("_LoginPartial")
+}
+*@

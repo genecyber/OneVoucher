@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="OneVoucher" />
+  <setParameter name="DefaultConnection-Web.config Connection String" value="Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\ShannonCode\Documents\database.mdf;Integrated Security=True;Connect Timeout=30" />
+  <setParameter name="DefaultConnection_DatabasePublish-Web.config Connection String" value="Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\ShannonCode\Documents\database.mdf;Integrated Security=True;Connect Timeout=30" />
+</parameters>

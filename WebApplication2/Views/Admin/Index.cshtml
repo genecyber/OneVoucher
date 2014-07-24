@@ -1,0 +1,149 @@
+﻿@using System.ServiceModel.Activities
+@model WebApplication2.Controllers.AdminController.AdminViewModel
+
+
+    @{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+<script>
+    $(document).ready(function () {
+        $("a:contains('Hello ')").addClass("active");
+        $("[name='item.Approved'][type='checkbox']").each(function (index) {
+            $(this).change(function(data) {
+                $(this).siblings("[name='item.Approved']").val($(this).is(":checked"));
+                var theForm = $(this).parents("form:first");
+                $.ajax({
+                    url: '/Admin/UpdateMerchantApproval',
+                    data: {
+                        __RequestVerificationToken: $(this).parents("form:first div").children("[name='__RequestVerificationToken']").val(),
+                        UserId: $(this).parents("form:first div").children("#item_UserId").val(),
+                        Approved: $(this).parents("form:first div").children("#item_Approved").is(":checked")
+                    },
+                    type: 'POST',
+                    success: function() {
+                        theForm.parents(".merchants_row").remove();
+                    }
+                });
+            });
+        });
+    });
+</script>
+    <div class="main">
+        <div class="content_box">
+            <h2>Admin</h2>
+            <div class="border" style="margin: 0 0 25px 0"></div>
+            <p>
+                @Html.ActionLink("Create New Voucher", "Create")
+            </p>
+            <div class="grey_box" style="margin-bottom: 30px;">
+                <div class="merchants_main_dv">
+                    <table class="table">
+                        <tr style="font-size: 60%; font-weight: bold;">
+                            <th>
+                                @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().VendorSelect)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().AmoutToLoad)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().Paid)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().Spent)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().MerchantPaid)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().LoadTxId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().VoucherGuid)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Vouchers.FirstOrDefault().EmailAddress)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model.Vouchers)
+                        {
+                            string style = null;
+                            if (item.Paid && !item.Spent)
+                            {
+                                style = "background-color:#CCFFCC";
+                            }
+                            if (!item.Paid && !item.Spent)
+                            {
+                                style = "background-color:#FFFFCC";
+                            }
+                            if (item.Paid && item.Spent)
+                            {
+                                style = "background-color:#FF6666";
+                            }
+
+                            <tr style="font-size: 60%; @style">
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VendorSelect)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AmoutToLoad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Paid)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Spent)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MerchantPaid)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LoadTxId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VoucherGuid)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                    @Html.ActionLink("Details", "AdminVoucherDetails", new { id = item.Id }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    @Html.ActionLink("Payout", "Payout", new { id = item.Id })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                    <hr/>
+                        @foreach (var item in Model.Merchants.Where(m=> !m.Approved))
+                        {
+                            <div class="merchants_row">
+                                <div class="merchants_logo_dv">
+                                    <a href="@item.WebsiteUrl"><img width="185" height="85" src="@item.ImageUrl"></a>
+                                </div><!--merchants_logo_dv-->
+                                <div class="merchants_name_dv">
+                                    <h3>@item.WebsiteName</h3>
+                                <p>@item.WebsiteDescription</p>
+                                </div><!--merchants_name_dv-->
+                                @using (Ajax.BeginForm("UpdateMerchantApproval", "Home", new AjaxOptions {}, new { id = "VendorUpdateForm", onsubmit = "push('"+item.UserId+"')" })) { 
+                                    <div>
+                                        @Html.AntiForgeryToken()
+                                        @Html.EditorFor(modelItem => item.Approved, new { @class = "check-box" })
+                                        @Html.HiddenFor(modelItem => item.UserId)
+                                        @Html.LabelFor(modelItem => item.Approved)
+                                    </div>
+                                }
+                            </div>
+                        }
+
+                </div>
+                <div class="merchants_shadow"></div>
+            </div>
+
+        </div>
+        <div class="box_shadow"></div>
+    </div>
