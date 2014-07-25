@@ -56,7 +56,7 @@
                 <div class="border" style="margin: 30px 0 25px 0"></div>
                 <div class="grey_box" style="margin-bottom: 30px;">
                     <div class="merchants_main_dv">
-                        <h2>Balance: @CashoutTotal @note</h2>
+                        <h2>Balance: $@CashoutTotal @note</h2>
                         @Html.AntiForgeryToken()
                         <input type="hidden" id="CashoutTotal" value="@CashoutTotal" />
                         <input type="submit" value="@val" class="btn btn-default" @isEnabled />
@@ -65,12 +65,12 @@
                         @foreach (var item in Model.Vouchers.Where(a => a.CashedOutToMerchant))
                         {
                             var row = "Cashed Out:" + item.AmoutToLoad + "on " + item.DatePaidout + "<br>";
-                            @row
+                            <p><img src="~/Images/cashout.gif" style="float: left; padding-right: 5px"/>@row</p>
                         }
                         @foreach (var item in Model.Vouchers.Where(a => !a.CashedOutToMerchant && a.MerchantSpentAtId.Equals(Guid.Parse(Model.Merchant.UserId))))
                         {
-                            var row = "Voucher Spent " + item.AmoutToLoad + " on " + item.DatePaidout;
-                            <p>@row</p>
+                            var row = "Voucher Spent for $" + item.AmoutToLoad + ", on : " + item.DateSpent;
+                            <p><img src="~/Images/green-arrow-icon.png" style="float: left; padding-right: 5px"/>@row</p>
                         }
                     </div>
                     <div class="merchants_shadow"></div><!--merchants_shadow-->

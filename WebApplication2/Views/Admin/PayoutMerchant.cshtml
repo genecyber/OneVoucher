@@ -37,12 +37,13 @@
                     </tr>
                     @foreach (var item in Model.Merchants.ToList())
                     {
+                        var merchantId = Guid.Parse(item.UserId);
                         <tr>
                             <td>
                                 <a href="@item.WebsiteUrl">@item.WebsiteName</a>
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.UserId)
+                                <a href="Payout/@item.UserId">@item.UserId</a>
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.PayoutRequested)
@@ -51,7 +52,7 @@
                                 @Html.DisplayFor(modelItem => item.EmailAddress)
                             </td>
                             <td>
-                                @Model.Vouchers.Where(v=>v.Paid && v.Spent && !v.CashedOutToMerchant).Sum(x => x.AmoutToLoad)
+                                @Model.Vouchers.Where(v => v.MerchantSpentAtId.Equals(merchantId) && v.Paid && v.Spent && !v.CashedOutToMerchant).Sum(x => x.AmoutToLoad)
                             </td>
                         </tr>
                     }

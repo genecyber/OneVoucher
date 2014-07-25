@@ -22,7 +22,7 @@
                     },
                     type: 'POST',
                     success: function() {
-                        theForm.parents(".merchants_row").remove();
+                        alert("Updated Successfully");
                     }
                 });
             });
@@ -38,6 +38,7 @@
             </p>
             <div class="grey_box" style="margin-bottom: 30px;">
                 <div class="merchants_main_dv">
+                    <h2>Vouchers</h2>
                     <table class="table">
                         <tr style="font-size: 60%; font-weight: bold;">
                             <th>
@@ -110,34 +111,36 @@
                                 </td>
                                 <td>
                                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                                    @Html.ActionLink("Details", "AdminVoucherDetails", new { id = item.Id }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    @Html.ActionLink("Details", "AdminVoucherDetails", new { id = item.Id })
+                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
                                 </td>
                             </tr>
                         }
 
                     </table>
                     <hr/>
-                        @foreach (var item in Model.Merchants.Where(m=> !m.Approved))
-                        {
-                            <div class="merchants_row">
-                                <div class="merchants_logo_dv">
-                                    <a href="@item.WebsiteUrl"><img width="185" height="85" src="@item.ImageUrl"></a>
-                                </div><!--merchants_logo_dv-->
-                                <div class="merchants_name_dv">
-                                    <h3>@item.WebsiteName</h3>
+                    <h2>Merchants</h2>
+                    @foreach (var item in Model.Merchants)
+                    {
+                        <div class="merchants_row">
+                            <p>@item.UserId</p>
+                            <div class="merchants_logo_dv">
+                                <a href="@item.WebsiteUrl"><img width="185" height="85" src="@item.ImageUrl"></a>
+                            </div><!--merchants_logo_dv-->
+                            <div class="merchants_name_dv">
+                                <h3>@item.WebsiteName</h3>
                                 <p>@item.WebsiteDescription</p>
-                                </div><!--merchants_name_dv-->
-                                @using (Ajax.BeginForm("UpdateMerchantApproval", "Home", new AjaxOptions {}, new { id = "VendorUpdateForm", onsubmit = "push('"+item.UserId+"')" })) { 
-                                    <div>
-                                        @Html.AntiForgeryToken()
-                                        @Html.EditorFor(modelItem => item.Approved, new { @class = "check-box" })
-                                        @Html.HiddenFor(modelItem => item.UserId)
-                                        @Html.LabelFor(modelItem => item.Approved)
-                                    </div>
-                                }
-                            </div>
-                        }
+                            </div><!--merchants_name_dv-->
+                            @using (Ajax.BeginForm("UpdateMerchantApproval", "Home", new AjaxOptions {}, new { id = "VendorUpdateForm", onsubmit = "push('"+item.UserId+"')" })) { 
+                                <div>
+                                    @Html.AntiForgeryToken()
+                                    @Html.EditorFor(modelItem => item.Approved, new { @class = "check-box clear" })
+                                    @Html.HiddenFor(modelItem => item.UserId)
+                                    @Html.LabelFor(modelItem => item.Approved)
+                                </div>
+                            }
+                        </div>
+                    }
 
                 </div>
                 <div class="merchants_shadow"></div>

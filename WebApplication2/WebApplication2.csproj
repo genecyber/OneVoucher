@@ -235,7 +235,9 @@
     <Content Include="Images\bg.jpg" />
     <Content Include="Images\border.png" />
     <Content Include="Images\buy-voucher.png" />
+    <Content Include="Images\cashout.gif" />
     <Content Include="Images\footer_bg.png" />
+    <Content Include="Images\green-arrow-icon.png" />
     <Content Include="Images\header-bg.png" />
     <Content Include="Images\icon-1-hover.png" />
     <Content Include="Images\icon-1.png" />

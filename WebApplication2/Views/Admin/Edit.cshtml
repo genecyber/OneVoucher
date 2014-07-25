@@ -88,6 +88,9 @@
 
                         <div class="form-group clear">
                             <div class="col-md-offset-2 col-md-10">
+                                @Html.HiddenFor(model => model.DateOfPurchase)
+                                @Html.HiddenFor(model => model.DatePaidout)
+                                @Html.HiddenFor(model => model.DateSpent)
                                 <input type="submit" value="Save" class="btn btn-default" />
                             </div>
                         </div>

@@ -101,6 +101,13 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ActionResult Edit(Guid id, BuyVoucherViewModel buyvoucherviewmodel)
         {
+            if (buyvoucherviewmodel.DateOfPurchase.Equals(DateTime.Parse("1/1/0001 12:00:00 AM")))
+                buyvoucherviewmodel.DateOfPurchase = DateTime.Now;
+            if (buyvoucherviewmodel.DatePaidout == null && buyvoucherviewmodel.CashedOutToMerchant)
+                buyvoucherviewmodel.DatePaidout = DateTime.Now;
+            if (buyvoucherviewmodel.DateSpent == null && buyvoucherviewmodel.Spent)
+                buyvoucherviewmodel.DateSpent = DateTime.Now;
+            
             try
             {
                 if (ModelState.IsValid)
@@ -116,6 +123,8 @@ namespace WebApplication2.Controllers
                 return View(db.BuyVoucherViewModels.FirstOrDefault(d => d.Id.Equals(id)));
             }
         }
+
+
 
         //
         // GET: /Admin/PayoutMerchant
